@@ -1,6 +1,6 @@
 // components/Stock.tsx
 import { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import config from "../config/config.json";
 
 function StockList() {
@@ -12,20 +12,30 @@ function StockList() {
         .then(result => setProducts(result.data));
     }, []);
   
-    const list = products.map((product, index) => <Text key={index}>Namn: { product.name } Lagersaldo: { product.stock }</Text>);
+    const list = products.map((product, index) => <Text style={styles.invlist} key={index}>Namn: { product.name }{'\n'}Lagersaldo: { product.stock }</Text>);
   
     return (
       <View>
         {list}
       </View>
     );
-  }
+}
   
-  export default function Stock() {
-    return (
-      <View>
-        <Text style={{color: '#333', fontSize: 24}}>Lagerförteckning</Text>
-        <StockList/>
-      </View>
-    );
-  }
+export default function Stock() {
+return (
+    <View>
+    <Text style={{color: '#333', fontSize: 24}}>Lagerförteckning</Text>
+    <StockList/>
+    </View>
+);
+}
+
+  
+const styles = StyleSheet.create({
+invlist: {
+    flex: 1,
+    fontSize: "18px",
+    lineHeight: "36px"
+
+}
+});
