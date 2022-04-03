@@ -12,10 +12,18 @@ function StockList() {
         .then(result => setProducts(result.data));
     }, []);
   
-    const list = products.map((product, index) => <Text style={styles.invlist} key={index}>Namn: { product.name }{'\n'}Lagersaldo: { product.stock }</Text>);
+    const list = products.map((product, index) => 
+    <View key={index} style={styles.invlistContainer}>
+      <View style={styles.invlist}><Text style={styles.invText}>{ product.name }</Text></View>
+      <View style={styles.invlist}><Text style={styles.invText}>{ product.stock }</Text></View>    
+    </View>);
   
     return (
       <View>
+        <View style={styles.invlistContainer}>
+          <View style={styles.invHeader}><Text style={styles.invText}>Produkt</Text></View>
+          <View style={styles.invHeader}><Text style={styles.invText}>Lagersaldo</Text></View>    
+        </View>
         {list}
       </View>
     );
@@ -24,18 +32,35 @@ function StockList() {
 export default function Stock() {
 return (
     <View>
-    <Text style={{color: '#333', fontSize: 24}}>Lagerförteckning</Text>
     <StockList/>
     </View>
 );
-}
+}   
 
   
 const styles = StyleSheet.create({
 invlist: {
     flex: 1,
-    fontSize: "18px",
-    lineHeight: "36px"
-
-}
+    padding: 10,
+    marginBottom: 1,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1, 
+},
+invHeader: {
+  flex: 1,
+  backgroundColor: '#ddd',
+  padding: 10,
+  marginBottom: 1
+},
+invText: {
+  fontSize: 18,
+  fontFamily: 'Lato_400Regular',
+  lineHeight: 32,
+},
+invlistContainer: {
+  display: 'flex',
+  flexDirection: 'row',
+  width: '100%',
+  justifyContent: 'space-between',
+},
 });
