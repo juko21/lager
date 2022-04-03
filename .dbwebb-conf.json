@@ -1,5 +1,4 @@
 {
-    "expo": "https://expo.dev/@juko21/lager?serviceType=classic&distributi
-    on=expo-go",
+    "expo": "https://expo.dev/@juko21/lager?serviceType=classic&distribution=expo-go",
     "github": "https://github.com/juko21/lager.git"
 }
