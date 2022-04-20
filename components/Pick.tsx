@@ -7,14 +7,16 @@ import { Base, Typography } from '../styles/index.js';
 
 const Stack = createNativeStackNavigator();
 
-export default function Pick() {
+export default function Pick(props) {
     return (
         <View style={Base.base}>
             <Text style={Typography.header}>ORDERLISTA</Text>
-                <Stack.Navigator initialRouteName="List">
-                    <Stack.Screen name="List" component={OrderList} options={{headerShown: false}}/>
-                    <Stack.Screen name="Details" component={PickList} />
-                </Stack.Navigator>
+            <Stack.Navigator initialRouteName="List">
+                <Stack.Screen name="List" options={{headerShown: false}} component={OrderList} />
+                <Stack.Screen name="Detaljer">
+                    {(screenProps) => <PickList {...screenProps} setProducts={props.setProducts} />}
+                </Stack.Screen>
+            </Stack.Navigator>
         </View>
     );
 }

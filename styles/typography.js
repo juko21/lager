@@ -11,6 +11,19 @@ export const header = {
     marginBottom: 4
 }
 
+export const header2 = {
+    fontSize: 24,
+    textAlign: 'center',
+    color: '#fff',
+    fontFamily: 'Lato_700Bold',
+    lineHeight: 36,
+    backgroundColor: '#777',
+    padding: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
+    marginBottom: 4
+}
+
 export const invHeader = {
     flex: 1,
     backgroundColor: '#ddd',
@@ -24,6 +37,11 @@ export const invText = {
     lineHeight: 32,
 }
 
+export const label = {
+    fontSize: 18,
+    fontFamily: 'Lato_400Regular',
+    lineHeight: 32,
+}
 export const orderListHeader = {
     fontSize: 18,
     textAlign: 'center',

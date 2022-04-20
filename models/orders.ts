@@ -1,9 +1,9 @@
-import { Inter_500Medium } from "@expo-google-fonts/inter";
 import config from "../config/config.json";
 import Order from "../interfaces/order.ts";
+
 const orders = {
     getOrders: async function getOrders() {
-        const response = await fetch(`${config.base_url}/orders?api_key=${config.api_key}`);
+        const response = await fetch(`${config.base_url}/orders?api_key=${config.api_key}   `);
         const result = await response.json();
 
         return result.data;
@@ -26,7 +26,7 @@ const orders = {
           })
         console.log(response.status);
 
-        for (item of order.order_items) {
+        for (const item of order.order_items) {
             const prodBody = {
                 api_key: config.api_key,
                 name: item.name,

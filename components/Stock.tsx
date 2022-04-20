@@ -1,24 +1,20 @@
 // components/Stock.tsx
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import config from "../config/config.json";
 import { Base, Typography } from '../styles/index.js';
+import productModel from "../models/products";
 
-function StockList() {
-    const [products, setProducts] = useState([]);
-  
-    useEffect(() => {
-        fetch(`${config.base_url}/products?api_key=${config.api_key}`)
-            .then(response => response.json())
-            .then(result => setProducts(result.data));
-    }, []);
-  
-    const list = products.map((product, index) => 
-    <View key={index} style={Base.invlistContainer}>
+function StockList({products, setProducts}) {  
+    useEffect(async () => {
+        setProducts(await productModel.getProducts());
+      }, []);
+
+    const list = products.map((product, index) => {
+    return <View key={index} style={Base.invlistContainer}>
         <View style={Base.invlist}><Text style={Typography.invText}>{ product.id }</Text></View>
         <View style={Base.invlist}><Text style={Typography.invText}>{ product.name }</Text></View>
         <View style={Base.invlist}><Text style={Typography.invText}>{ product.stock }</Text></View>    
-    </View>);
+    </View>});
   
     return (
         <View>
@@ -32,10 +28,10 @@ function StockList() {
     );
 }
   
-export default function Stock() {
+export default function Stock( {products, setProducts} ) {
 return (
     <View>
-    <StockList/>
+        <StockList products={products} setProducts={setProducts} />
     </View>
 );
 }   

@@ -1,13 +1,21 @@
 import { View, Text, Button, ColorPropType } from "react-native";
 import orderModel from "../models/orders.ts";
 import { Base, Typography } from '../styles/index.js';
+import productModel from "../models/products";
+import { useState, useEffect } from 'react';
 
-export default function PickList({ route, navigation }) {
+export default function PickList({ route, navigation, setProducts }) {
     const { order } = route.params;
+    const [productsList, setProductsList] = useState([]);
+
+    useEffect(async () => {
+        setProductsList(await productModel.getProducts());
+    }, []);
 
     async function pack() {
         await orderModel.packOrder(order);
-        navigation.navigate("List");
+        setProducts(await productModel.getProducts());
+        navigation.navigate("List", { reload: true });
     }
 
     let packagable : boolean = true;
