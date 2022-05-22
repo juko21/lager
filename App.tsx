@@ -5,6 +5,7 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Lato_300Light, Lato_300Light_Italic, Lato_400Regular, Lato_400Regular_Italic, Lato_700Bold, Lato_700Bold_Italic } from '@expo-google-fonts/lato';
 import Home from "./components/Home.tsx";
 import Pick from "./components/Pick.tsx";
+import Ship from "./components/Ship.tsx";
 import Deliveries from "./components/Deliveries.tsx";
 import Auth from "./components/auth/Auth.tsx";
 import Logout from "./components/auth/Logout.tsx";
@@ -21,7 +22,8 @@ const Tab = createBottomTabNavigator();
 const routeIcons = {
     "Lager": "home",
     "Plock": "list",
-    "Leverans": "airplane",
+    "Skeppning": "cube-outline",
+    "Inleverans": "airplane",
     "Faktura": "document-text-outline",
     "Logga in": "log-in-outline",
     "Logga ut": "log-out-outline"
@@ -71,7 +73,10 @@ export default function App() {
                     <Tab.Screen name="Plock">
                         {() => <Pick products={products} setProducts={setProducts} />}
                     </Tab.Screen>
-                    <Tab.Screen name="Leverans">
+                    <Tab.Screen name="Skeppning">
+                        {() => <Ship products={products} setProducts={setProducts} />}
+                    </Tab.Screen>
+                    <Tab.Screen name="Inleverans">
                         {() => <Deliveries products={products} setProducts={setProducts} />}
                     </Tab.Screen>
                     {isLoggedIn ?

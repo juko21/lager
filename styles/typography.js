@@ -70,6 +70,7 @@ export const orderProdList = {
 
 export const bold = {
     fontWeight: 'bold',
+    fontSize: 18,
 }
 
 export const invoiceList = {

@@ -22,13 +22,13 @@ export default function InvoicesList({ route, navigation }) {
     }, []);
 
     const listOfOrders = allOrders
-        .filter(order => order.status_id === 100)
+        .filter(order => order.status_id === 200)
         .map((order, index) => {
             return <Button
                 title={ order.name }
                 key={index}
                 onPress={() => {
-                    navigation.navigate('Plocka order', {
+                    navigation.navigate('Skeppa order', {
                         order: order
                     });
                 }}
@@ -37,8 +37,9 @@ export default function InvoicesList({ route, navigation }) {
 
     return (
         <ScrollView>
+            <Text style={Typography.header}>ORDERLISTA</Text>
             <View>
-                <Text style={ Typography.orderListHeader }>Redo att plockas:</Text>
+                <Text style={ Typography.orderListHeader }>Redo att Skeppas:</Text>
                 {listOfOrders}
             </View>
         </ScrollView>
