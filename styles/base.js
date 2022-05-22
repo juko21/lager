@@ -25,3 +25,26 @@ export const invlistContainer = {
     width: '100%',
     justifyContent: 'space-between',
 }
+export const invoiceList = {
+    padding: 10,
+    backgroundColor: '#fff',
+    marginBottom: 1,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+}
+
+export const invoiceListEven = {
+    padding: 10,
+    backgroundColor: '#eee',
+    marginBottom: 1,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+}
+
+export const invoiceListHeader = {
+    padding: 10,
+    backgroundColor: '#aaa',
+    marginBottom: 1,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+}

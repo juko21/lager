@@ -71,3 +71,13 @@ export const orderProdList = {
 export const bold = {
     fontWeight: 'bold',
 }
+
+export const invoiceList = {
+    fontSize: 18,
+    color: '#333',
+}
+
+export const invoiceListHeader = {
+    fontSize: 18,
+    color: '#fff',
+}

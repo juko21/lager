@@ -1,4 +1,4 @@
-import { useState } from 'react';import { StatusBar } from 'expo-status-bar';
+import { useState, useEffect } from 'react';import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppLoading from 'expo-app-loading';
@@ -6,6 +6,11 @@ import { useFonts, Lato_300Light, Lato_300Light_Italic, Lato_400Regular, Lato_40
 import Home from "./components/Home.tsx";
 import Pick from "./components/Pick.tsx";
 import Deliveries from "./components/Deliveries.tsx";
+import Auth from "./components/auth/Auth.tsx";
+import Logout from "./components/auth/Logout.tsx";
+
+import Invoices from "./components/Invoices.tsx";
+import authModel from './models/auth.ts';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,11 +21,21 @@ const Tab = createBottomTabNavigator();
 const routeIcons = {
     "Lager": "home",
     "Plock": "list",
-    "Leverans": "airplane"
+    "Leverans": "airplane",
+    "Faktura": "document-text-outline",
+    "Logga in": "log-in-outline",
+    "Logga ut": "log-out-outline"
 };
+
 
 export default function App() {
     const [products, setProducts] = useState([]);
+
+    const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+
+    useEffect(async () => {
+    setIsLoggedIn(await authModel.loggedIn());
+    }, []);
 
     let [fontsLoaded] = useFonts({
         Lato_300Light,
@@ -59,7 +74,21 @@ export default function App() {
                     <Tab.Screen name="Leverans">
                         {() => <Deliveries products={products} setProducts={setProducts} />}
                     </Tab.Screen>
-                </Tab.Navigator>
+                    {isLoggedIn ?
+                        <Tab.Screen name="Faktura">
+                            {() => <Invoices products={products} />}
+                        </Tab.Screen>
+                        :
+                        <Tab.Screen name="Logga in">
+                            {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
+                        </Tab.Screen>
+                    }
+                    {isLoggedIn &&
+                        <Tab.Screen name="Logga ut">
+                            {() => <Logout setIsLoggedIn={setIsLoggedIn} />}
+                        </Tab.Screen>
+                    }
+                 </Tab.Navigator>
             </NavigationContainer>
             <StatusBar style="auto" />
         </SafeAreaView>

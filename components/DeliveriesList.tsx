@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { View, Text, Button } from "react-native";
-import config from "./../config/config.json";
 import { Base, Typography } from '../styles/index.js';
 import deliveryModel from "../models/delivery.ts";
 
