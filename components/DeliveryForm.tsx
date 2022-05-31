@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Platform, ScrollView, Text, TextInput, Button, View } from "react-native";
 import { Base, Typography, Forms } from '../styles';
 import { Picker } from '@react-native-picker/picker';
+import { showMessage } from "react-native-flash-message";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -76,15 +77,37 @@ export default function DeliveryForm({ route, navigation, setProducts }) {
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
     async function addDelivery() {
-        await deliveryModel.addDelivery(delivery);
+        if (delivery.comment && delivery.delivery_date && delivery.product_id && delivery.amount) {
+
+            if (typeof(delivery.amount) === "number") {
+                await deliveryModel.addDelivery(delivery);
         
-        const updatedProduct = {
-            ...currentProduct,
-            stock: (currentProduct.stock || 0) + (delivery.amount || 0)
-        };
-        await productModel.updateProduct(updatedProduct);
-        setProducts(await productModel.getProducts())
-        navigation.navigate("List", { reload: true });
+                const updatedProduct = {
+                    ...currentProduct,
+                    stock: (currentProduct.stock || 0) + (delivery.amount || 0)
+                };
+                await productModel.updateProduct(updatedProduct);
+                setProducts(await productModel.getProducts())
+                showMessage({
+                    message: "Inleverans registrerad",
+                    description: "Inleveransen har registrerats",
+                    type: "success",
+                });
+                navigation.navigate("List", { reload: true });
+            } else {
+                showMessage({
+                    message: "Felaktigt värde",
+                    description: "Antal måste vara ett nummer",
+                    type: "success",
+                });
+            }
+        } else {
+            showMessage({
+                message: "Värde saknas",
+                description: "Vänligen fyll i alla uppgifter",
+                type: "success",
+        });        }
+
     }
 
     return (

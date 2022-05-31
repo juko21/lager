@@ -80,8 +80,7 @@ export default function ShipOrder({ route }) {
                 <MapView
                     ref={mapRef}
                     key={ (marker ? "1" : "0") + (locationMarker ? "1" : "0") }
-                    style={styles.map}
-                    onMapLoaded={ fitMarkers() }
+c                    onMapLoaded={ fitMarkers() }
                     initialRegion={{ 
                         latitude: 56.1612,
                         longitude: 15.5869,

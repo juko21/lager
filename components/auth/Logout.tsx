@@ -10,7 +10,6 @@ export default function Logout( props ) {
         props.setIsLoggedIn(false);
     }
 
-
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Button title="Logga ut" onPress={() => logout()} />

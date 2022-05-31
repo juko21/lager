@@ -24,6 +24,7 @@ export default function DeliveriesList({ route, navigation }) {
     
     const listOfDeliveries = allDeliveries.map((delivery, index) => {
     return <View key={index} style={Base.invlistContainer}>
+        
         <View style={Base.invlist}><Text style={Typography.invText}>{ delivery.id }</Text></View>
         <View style={Base.invlist}><Text style={Typography.invText}>{ delivery.product_name }</Text></View>
         <View style={Base.invlist}><Text style={Typography.invText}>{ delivery.amount }</Text></View>    

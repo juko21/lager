@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import FlashMessage from 'react-native-flash-message';
+
 import AppLoading from 'expo-app-loading';
 import { useFonts, Lato_300Light, Lato_300Light_Italic, Lato_400Regular, Lato_400Regular_Italic, Lato_700Bold, Lato_700Bold_Italic } from '@expo-google-fonts/lato';
 import Home from "./components/Home.tsx";
@@ -52,7 +53,6 @@ export default function App() {
         return <AppLoading />;
     }
 
-
     return (
         <SafeAreaView style={Base.container}>
             <NavigationContainer>
@@ -96,6 +96,7 @@ export default function App() {
                  </Tab.Navigator>
             </NavigationContainer>
             <StatusBar style="auto" />
+            <FlashMessage position="top" />
         </SafeAreaView>
     );
 }
