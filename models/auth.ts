@@ -60,6 +60,27 @@ const auth = {
     },
     logout: async function logout() {
         await storage.deleteToken();
+    },
+    validateEmail: function validateEmail(text: string) {
+        const pattern =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+        return pattern.test(text) ? true : false;
+    },
+    validatePassword: function validatePassword(text: string) {
+        const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!\.-]).{4,}$/;
+        // ^                : Start
+        // (?=.*\d)         : Digits
+        // (?=.* [a-z])     : lowerCase
+        // (?=.* [A-Z])     : UpperCase
+        // (?=.* [!\.-\?)   : Special chars
+        // (??.{4,})        : Length
+        // $                : end
+        const testText = "1242ghrhsKLda!!.-aA!";
+        console.log("1242ghrhsKLda!!.-aA!");
+        console.log(pattern.test(text));
+        console.log(testText.match(pattern));
+        return pattern.test(text) ? true : false;
     }
 };
 

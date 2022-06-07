@@ -4,9 +4,8 @@ import config from "./../config/config.json";
 import { Typography } from '../styles/index.js';
 import orderModel from "../models/orders.ts";
 
-export default function InvoicesList({ route, navigation }) {
+export default function ShipOrderList({ route, navigation, allOrders, setAllOrders}) {
     const { reload } = route.params || false;
-    const [allOrders, setAllOrders] = useState([]);
 
     if (reload) {
         reloadOrders();

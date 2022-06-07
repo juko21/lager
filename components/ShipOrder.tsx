@@ -14,9 +14,11 @@ export default function ShipOrder({ route }) {
     const [locationMarker, setLocationMarker] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
     const mapRef = useRef(null);
+    console.log(order);
 
     function fitMarkers() {
-        if (marker && locationMarker){
+
+        if (marker && locationMarker){  
             setTimeout(() => {
                 mapRef.current.fitToSuppliedMarkers(["mp", "lp"], 
                     {
@@ -63,8 +65,6 @@ export default function ShipOrder({ route }) {
         })();
     }, []);
 
-
-    
     const orderItemsList = order.order_items.map((item, index) => {
         return <View key={index} style={Base.invlistContainer}>
                     <View style={Base.invlist}><Text style={Typography.invText}>{ item.name }</Text></View>
@@ -74,13 +74,14 @@ export default function ShipOrder({ route }) {
     });
 
     return (
-        <View style={Base.base}>
+        <View style={{flex: 1}}>
             <Text style={Typography.header2}>Skicka order</Text>
             <View style={styles.container}>
                 <MapView
                     ref={mapRef}
+                    style={styles.map}
                     key={ (marker ? "1" : "0") + (locationMarker ? "1" : "0") }
-c                    onMapLoaded={ fitMarkers() }
+                    onMapLoaded={ fitMarkers() }
                     initialRegion={{ 
                         latitude: 56.1612,
                         longitude: 15.5869,

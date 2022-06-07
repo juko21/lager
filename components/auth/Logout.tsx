@@ -8,6 +8,11 @@ export default function Logout( props ) {
     async function logout() {
         authModel.logout();
         props.setIsLoggedIn(false);
+        showMessage({
+            message: "Användare utloggad",
+            description: "Du är nu utloggad",
+            type: "success",
+        });
     }
 
     return (

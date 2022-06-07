@@ -10,10 +10,18 @@ const Stack = createNativeStackNavigator();
 export default function Pick(props) {
     return (
         <View style={Base.base}>
-            <Stack.Navigator initialRouteName="List">
-                <Stack.Screen name="List" options={{headerShown: false}} component={ShipOrderList} />
-                <Stack.Screen name="Skeppa order">
-                    {(screenProps) => <ShipOrder {...screenProps} setProducts={props.setProducts} />}
+            <Stack.Navigator initialRouteName="ShippingList" ScreenOptions={{headerShown: false}}>
+                <Stack.Screen name="ShippingList" options={{headerShown: false}}>
+                    {(screenProps) => 
+                    <ShipOrderList
+                    {...screenProps}
+                        allOrders={props.allOrders}
+                        setAllOrders={props.setAllOrders}
+                        setProducts={props.setProducts}
+                    />}
+                </Stack.Screen>
+                <Stack.Screen name="Skeppa order" screenOptions={{headerShown: false}}>
+                    {(screenProps) => <ShipOrder {...screenProps} setProducts={props.setProducts}/>}
                 </Stack.Screen>
             </Stack.Navigator>
         </View>

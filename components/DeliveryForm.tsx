@@ -12,7 +12,6 @@ import Delivery from '../interfaces/delivery';
 import productModel from "../models/products";
 import deliveryModel from "../models/delivery";
 
-
 function DateDropDown(props) {
     const [dropDownDate, setDropDownDate] = useState<Date>(new Date());
     const [show, setShow] = useState<Boolean>(false);
@@ -20,11 +19,11 @@ function DateDropDown(props) {
     const showDatePicker = () => {
         setShow(true);
     };
-
     return (
         <View>
+            <Text>{Platform.OS}</Text>
             {Platform.OS === "android" && (
-                <Button onPress={showDatePicker} title="Visa datumväljare" />
+                <Button testID="date" onPress={showDatePicker} title="Visa datumväljare" />
             )}
             {(show || Platform.OS === "ios") && (
                 <DateTimePicker
@@ -38,6 +37,7 @@ function DateDropDown(props) {
 
                         setShow(false);
                     }}
+                    testID="datePicker"
                     value={dropDownDate}
                 />
             )}
@@ -59,8 +59,9 @@ function ProductDropDown(props) {
     });
 
     return (
-        <View style={{...Forms.dropdown}}>
+        <View style={{...Forms.dropdown}} >
             <Picker
+                testID="product"
                 selectedValue={props.delivery?.product_id}
                 onValueChange={(itemValue) => {
                     props.setDelivery({ ...props.delivery, product_id: itemValue });
@@ -72,43 +73,15 @@ function ProductDropDown(props) {
     );
 }
 
-export default function DeliveryForm({ route, navigation, setProducts }) {
-    const [delivery, setDelivery] = useState<Partial<Delivery>>({});
-    const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
-
-    async function addDelivery() {
-        if (delivery.comment && delivery.delivery_date && delivery.product_id && delivery.amount) {
-
-            if (typeof(delivery.amount) === "number") {
-                await deliveryModel.addDelivery(delivery);
-        
-                const updatedProduct = {
-                    ...currentProduct,
-                    stock: (currentProduct.stock || 0) + (delivery.amount || 0)
-                };
-                await productModel.updateProduct(updatedProduct);
-                setProducts(await productModel.getProducts())
-                showMessage({
-                    message: "Inleverans registrerad",
-                    description: "Inleveransen har registrerats",
-                    type: "success",
-                });
-                navigation.navigate("List", { reload: true });
-            } else {
-                showMessage({
-                    message: "Felaktigt värde",
-                    description: "Antal måste vara ett nummer",
-                    type: "success",
-                });
-            }
-        } else {
-            showMessage({
-                message: "Värde saknas",
-                description: "Vänligen fyll i alla uppgifter",
-                type: "success",
-        });        }
-
-    }
+export default function DeliveryForm({
+    route,
+    navigation,
+    delivery,
+    setDelivery,
+    currentProduct,
+    setCurrentProduct,
+    addDelivery
+}) {
 
     return (
         <ScrollView>
@@ -119,6 +92,7 @@ export default function DeliveryForm({ route, navigation, setProducts }) {
                     setDelivery({ ...delivery, comment: content })
                 }}
                 value={delivery?.comment}
+                testID={'comment'}
             />
             <DateDropDown
                 delivery={delivery}
@@ -138,6 +112,7 @@ export default function DeliveryForm({ route, navigation, setProducts }) {
                 }}
                 value={delivery?.amount?.toString()}
                 keyboardType="numeric"
+                testID={'amount'}
             />
             <Button
                 title="Gör inleverans"

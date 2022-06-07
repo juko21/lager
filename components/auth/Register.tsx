@@ -10,6 +10,21 @@ export default function Register({ navigation }) {
 
     async function registerUser() {
         if (auth.email && auth.password) {
+            if(!authModel.validatePassword(auth.password)) {
+                showMessage({
+                    message: "Icke giltigt lösenord",
+                    description: "Lösenoret måste innehålla minst 4 tecken, små och stora bokstäver, siffror och specialtecken",
+                    type: "warning"
+                })
+                return;
+            } else if (!authModel.validateEmail(auth.email)) {
+                showMessage({
+                    message: "Icke giltig epost",
+                    description: "Epostadressen du har skrivit in är inte giltig",
+                    type: "warning"
+                })
+                return;
+            }
             const result = await authModel.register(auth.email, auth.password);
             navigation.navigate("Login", { reload: true });
             showMessage({

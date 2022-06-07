@@ -13,7 +13,13 @@ export default function Pick(props) {
         <View style={Base.base}>
             <Text style={Typography.header}>ORDERLISTA</Text>
             <Stack.Navigator initialRouteName="List">
-                <Stack.Screen name="List" options={{headerShown: false}} component={OrderList} />
+                <Stack.Screen name="List" options={{headerShown: false}}>
+                {(screenProps) => <OrderList
+                    {...screenProps}
+                    allOrders={props.allOrders}
+                    setAllOrders={props.setAllOrders}
+                />}
+                </Stack.Screen>
                 <Stack.Screen name="Plocka order">
                     {(screenProps) => <PickList {...screenProps} setProducts={props.setProducts} />}
                 </Stack.Screen>

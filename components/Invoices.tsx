@@ -14,7 +14,7 @@ export default function Invoices(props) {
             <Stack.Navigator initialRouteName="Fakturor">
                 <Stack.Screen name="Fakturor" options={{headerShown: false}} component={InvoiceList} />
                 <Stack.Screen name="Skapa ny faktura">
-                    {(screenProps) => <OrderToInvoiceList {...screenProps} />}
+                    {(screenProps) => <OrderToInvoiceList {...screenProps} allOrders={props.allOrders} setAllOrders={props.setAllOrders} reload={true}/>}
                 </Stack.Screen>
             </Stack.Navigator>
         </View>

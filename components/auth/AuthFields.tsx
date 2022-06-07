@@ -1,5 +1,6 @@
 // auth/AuthFields.tsx
 import { View, Text, TextInput, Button } from "react-native";
+import { showMessage } from "react-native-flash-message";
 import { Typography, Forms, Base } from '../../styles';
 
 export default function AuthFields({ auth, setAuth, title, submit, navigation}) {

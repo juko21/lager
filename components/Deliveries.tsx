@@ -5,7 +5,7 @@ import { Base, Typography } from '../styles/index.js';
 import { View, Text } from "react-native";
 
 import DeliveriesList from './DeliveriesList';
-import DeliveryForm from './DeliveryForm';
+import DeliveryAdd from './DeliveryAdd';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +16,7 @@ export default function Deliveries(props) {
             <Stack.Navigator initialRouteName="List">
                 <Stack.Screen name="List" options={{headerShown: false}} component={DeliveriesList} />
                 <Stack.Screen name="Ny inleverans">
-                    {(screenProps) => <DeliveryForm {...screenProps} setProducts={props.setProducts} />}
+                    {(screenProps) => <DeliveryAdd {...screenProps} products={props.products} setProducts={props.setProducts} />}
                 </Stack.Screen>
             </Stack.Navigator>
         </View>

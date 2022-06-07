@@ -1,7 +1,7 @@
 // del av components/DeliveriesList.tsx
 
 import { useState, useEffect } from 'react';
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, ScrollView } from "react-native";
 import { Base, Typography } from '../styles/index.js';
 import deliveryModel from "../models/delivery.ts";
 
@@ -34,20 +34,22 @@ export default function DeliveriesList({ route, navigation }) {
         noDeliveries = "Inga inleveranser funna.";
     }
     return (
-    <View>
-        <View style={Base.invlistContainer}>
-            <View style={Typography.invHeader}><Text style={Typography.invText}>Id</Text></View>
-            <View style={Typography.invHeader}><Text style={Typography.invText}>Produkt</Text></View>
-            <View style={Typography.invHeader}><Text style={Typography.invText}>Antal</Text></View>    
+    <ScrollView>
+        <View>
+            <View style={Base.invlistContainer}>
+                <View style={Typography.invHeader}><Text style={Typography.invText}>Id</Text></View>
+                <View style={Typography.invHeader}><Text style={Typography.invText}>Produkt</Text></View>
+                <View style={Typography.invHeader}><Text style={Typography.invText}>Antal</Text></View>    
+            </View>
+            {listOfDeliveries}
+            <Text>{noDeliveries}</Text>
+            <Button
+                title="Skapa ny inleverans"
+                onPress={() => {
+                    navigation.navigate('Ny inleverans');
+                }}
+            />
         </View>
-        {listOfDeliveries}
-        <Text>{noDeliveries}</Text>
-        <Button
-            title="Skapa ny inleverans"
-            onPress={() => {
-                navigation.navigate('Ny inleverans');
-            }}
-        />
-    </View>
+    </ScrollView>
     );
 }

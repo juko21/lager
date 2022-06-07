@@ -7,9 +7,8 @@ import { Typography } from '../styles/index.js';
 import orderModel from "../models/orders.ts";
 import invoiceModel from "../models/invoices.ts";
 
-export default function OrderToInvoiceList( {route, navigation} ) {
+export default function OrderToInvoiceList( {route, navigation, allOrders, setAllOrders} ) {
     const { reload } = route.params || false;
-    const [allOrders, setAllOrders] = useState([]);
 
     if (reload) {
         reloadOrders();
@@ -19,10 +18,6 @@ export default function OrderToInvoiceList( {route, navigation} ) {
         const result = await orderModel.getOrders();
         setAllOrders(result);
     }
-
-    useEffect(() => {
-        reloadOrders();
-    }, []);
 
     async function invoiceOrder(order) {
         await invoiceModel.createInvoice(order);
