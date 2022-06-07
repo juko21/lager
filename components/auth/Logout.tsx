@@ -2,6 +2,7 @@
 
 import authModel from '../../models/auth.ts';
 import { View, Button } from "react-native";
+import { showMessage } from 'react-native-flash-message';
 
 export default function Logout( props ) {
 
